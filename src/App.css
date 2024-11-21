@@ -1,0 +1,255 @@
+@tailwind base;  
+@tailwind components;  
+@tailwind utilities;
+
+
+/* Títulos */
+h1, h2, h3, h4 {
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+/* Estilos para botones */
+button {
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* Tabla de productos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  max-width: 800px; /* Máximo ancho */
+  margin: 1rem auto; /* Centramos la tabla */
+  border: 2px solid #333; /* Borde extra para la tabla */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  border-radius: 0.5rem; /* Bordes redondeados para la tabla */
+  overflow: hidden; /* Esquinas redondeadas aplicadas */
+}
+
+table th, table td {
+  border: 1px solid #333; /* Borde más oscuro */
+  padding: 0.75rem;
+  text-align: left;
+}
+
+
+
+
+
+
+
+/* Estilos para botones en la tabla */
+table td button {
+  width: auto;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  transition: background-color 0.3s;
+}
+
+table td button.bg-yellow-500:hover {
+  background-color: #fcd34d; /* Color de botón editar */
+}
+
+table td button.bg-red-500:hover {
+  background-color: #ef4444; /* Color de botón eliminar */
+}
+
+table td button.bg-blue-500:hover {
+  background-color: #3b82f6; /* Color de botón agregar */
+}
+
+/* Órdenes por mesa */
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centramos las mesas */
+  gap: 1rem; /* Espacio entre mesas */
+}
+
+.border {
+  border: 1px solid #ccc;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.m-2 {
+  margin: 0.25rem;
+}
+
+.w-64 {
+  width: auto; /* Ajuste automático de ancho dependiendo del contenido */
+  min-width: 16rem; /* Ancho mínimo */
+}
+
+.h-auto {
+  height: auto; /* Ajusta la altura al contenido */
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.overflow-auto {
+  overflow-y: auto;
+  max-height: 200px; /* Limita la altura del listado de productos */
+}
+
+/* Estilos para el total de mesa */
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Espaciado y alineación */
+.justify-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.border-b {
+  border-bottom: 1px solid #ccc;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+/* Colores de fondo para categorías */
+.bg-gray-100 {
+  background-color: #f7f7f7;
+}
+
+.bg-blue-500 {
+  background-color: #3b82f6; /* Color de botón agregar */
+}
+
+.bg-yellow-500 {
+  background-color: #fbbf24; /* Color de botón editar */
+}
+
+.bg-red-500 {
+  background-color: #ef4444; /* Color de botón eliminar */
+}
+
+/* Texto blanco */
+.text-white {
+  color: white;
+}
+
+/* Tamaño de fuente y espaciado de botones */
+button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
+
+/* Estilos adicionales para mejor visualización */
+.container {
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 1200px;
+}
+
+.product-input-section {
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+button {
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Estilo de la lista de productos */
+.listado-productos {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+/* Estilos para el nav */
+nav {  
+  background-color: rgba(75, 15, 185, 0.966); /* Color de fondo más neutro */  
+  padding: 2rem 3rem; /* Aumento del espaciado horizontal para mayor integración */  
+  position: sticky;  
+  top: 0;  
+  width: 100%;  
+  z-index: 1000; /* Asegura que el nav esté encima de otros elementos */  
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil para más profundidad */  
+}  
+
+nav ul {  
+  display: flex;  
+  justify-content: space-around; /* Cambiado para un espaciado equilibrado entre elementos */  
+  list-style: none; /* Quitamos los puntos de la lista */  
+  padding: 0;  
+  margin: 0;  
+}  
+
+nav ul li {  
+  margin: 0 1rem;
+  
+ /* Espaciado entre los elementos del menú */  
+}  
+
+nav ul li a {  
+  color: #fff; /* Color del texto en blanco */  
+  text-decoration: none; /* Quitamos el subrayado */  
+  font-size: 1rem; /* Tamaño del texto ajustado para un mejor diseño */  
+  font-weight: 500; /* Peso del texto ligeramente reducido */  
+  padding: 0.5rem 1.5rem; /* Aumentamos el espacio interno para mayor comodidad */  
+  border-radius: 0.5rem; /* Bordes más redondeados */  
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para el color también */  
+}  
+
+nav ul li a:hover {  
+  background-color: rgba(255, 255, 255, 0.1); /* Color de fondo sutil al pasar el ratón */  
+  color: #fff; /* Mantener el color del texto blanco durante el hover */  
+}  
+
+nav ul li a.active {  
+  background-color: #3b82f6; /* Resaltamos la página activa con un color azul claro */  
+  color: #fff; /* Aseguramos que el texto activo sea visible */  
+}

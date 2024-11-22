@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, BrowserRouter, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, Navigate, useLocation } from 'react-router-dom';  // Importa useLocation
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Login from './components/login';
 import MainMenu from './components/mainmenu';
@@ -11,20 +11,23 @@ import Usuarios from './components/usuarios';
 import { getFromLocalStorage } from './services/LocalStorageService';
 import './App.css';
 
-function AppContent() {
-  const location = useLocation(); 
+function App() {
+  const navigate = useNavigate();
+  const currentLocation = useLocation();  // Usa un nombre diferente a 'location'
   const [usuarioActivo, setUsuarioActivo] = useState('');
 
   useEffect(() => {
     const usuario = getFromLocalStorage('usuarioActivo');
     if (usuario) {
       setUsuarioActivo(usuario);
+    } else {
+      navigate('/login');
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="flex">
-      {location.pathname !== '/' && (
+      {usuarioActivo && currentLocation.pathname !== '/login' && (
         <nav className="bg-violet-700 h-screen w-64 p-4 shadow-lg">
           <p className="text-white font-semibold mb-4">Usuario: {usuarioActivo}</p>
           <ul>
@@ -63,24 +66,17 @@ function AppContent() {
       )}
       <div className="flex-1">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/menu" element={<MainMenu />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/ventas" element={<Ventas />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/provedores" element={<Proveedores />} />
-          <Route path="/usuarios" element={<Usuarios />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={usuarioActivo ? <Navigate to="/menu" /> : <Navigate to="/login" />} />
+          <Route path="/menu" element={usuarioActivo ? <MainMenu /> : <Navigate to="/login" />} />
+          <Route path="/productos" element={usuarioActivo ? <Productos /> : <Navigate to="/login" />} />
+          <Route path="/ventas" element={usuarioActivo ? <Ventas /> : <Navigate to="/login" />} />
+          <Route path="/registro" element={usuarioActivo ? <Registro /> : <Navigate to="/login" />} />
+          <Route path="/provedores" element={usuarioActivo ? <Proveedores /> : <Navigate to="/login" />} />
+          <Route path="/usuarios" element={usuarioActivo ? <Usuarios /> : <Navigate to="/login" />} />
         </Routes>
       </div>
     </div>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter basename="/bar-app">
-      <AppContent />
-    </BrowserRouter>
   );
 }
 

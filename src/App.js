@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, useNavigate, Navigate, useLocation } from 'react-router-dom';  // Importa useLocation
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Login from './components/login';
 import MainMenu from './components/mainmenu';
@@ -12,24 +12,22 @@ import { getFromLocalStorage } from './services/LocalStorageService';
 import './App.css';
 
 function App() {
-  const navigate = useNavigate();
-  const currentLocation = useLocation();  // Usa un nombre diferente a 'location'
-  const [usuarioActivo, setUsuarioActivo] = useState('');
+  const location = useLocation(); // Hook para obtener la ubicación actual
+  const [usuarioActivo, setUsername] = useState('');
 
   useEffect(() => {
-    const usuario = getFromLocalStorage('usuarioActivo');
-    if (usuario) {
-      setUsuarioActivo(usuario);
-    } else {
-      navigate('/login');
+    const usuarioActivo = getFromLocalStorage('usuarioActivo');
+    if (usuarioActivo) {
+      setUsername(usuarioActivo);
     }
-  }, [navigate]);
+  }, []);
 
   return (
-    <div className="flex">
-      {usuarioActivo && currentLocation.pathname !== '/login' && (
-        <nav className="bg-violet-700 h-screen w-64 p-4 shadow-lg">
-          <p className="text-white font-semibold mb-4">Usuario: {usuarioActivo}</p>
+    <div className=''>
+      {/* Solo mostramos el nav si no estamos en la página de Login */}
+      {location.pathname !== '/' && (
+        <nav className="bg-violet-700 h-full w-64 p-4 top-0 left-0 shadow-lg">
+          <p className='text-white rounded font-semibold'>Usuario: {usuarioActivo}</p>
           <ul>
             <li>
               <Link to="/menu" className="flex items-center text-white p-2 rounded">
@@ -53,7 +51,7 @@ function App() {
             </li>
             <li>
               <Link to="/provedores" className="flex items-center text-white p-2 rounded">
-                <i className="fas fa-truck mr-2"></i> Proveedores
+                <i className="fas fa-truck mr-2"></i> Provedores
               </Link>
             </li>
             <li>
@@ -64,18 +62,16 @@ function App() {
           </ul>
         </nav>
       )}
-      <div className="flex-1">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={usuarioActivo ? <Navigate to="/menu" /> : <Navigate to="/login" />} />
-          <Route path="/menu" element={usuarioActivo ? <MainMenu /> : <Navigate to="/login" />} />
-          <Route path="/productos" element={usuarioActivo ? <Productos /> : <Navigate to="/login" />} />
-          <Route path="/ventas" element={usuarioActivo ? <Ventas /> : <Navigate to="/login" />} />
-          <Route path="/registro" element={usuarioActivo ? <Registro /> : <Navigate to="/login" />} />
-          <Route path="/provedores" element={usuarioActivo ? <Proveedores /> : <Navigate to="/login" />} />
-          <Route path="/usuarios" element={usuarioActivo ? <Usuarios /> : <Navigate to="/login" />} />
-        </Routes>
-      </div>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/menu" element={<MainMenu />} />
+        <Route path="/productos" element={<Productos />} />
+        <Route path="/ventas" element={<Ventas />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/provedores" element={<Proveedores />} />
+        <Route path="/usuarios" element={<Usuarios />} />
+      </Routes>
     </div>
   );
 }

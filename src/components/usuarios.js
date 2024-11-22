@@ -4,7 +4,7 @@ import { getFromLocalStorage, saveToLocalStorage,  } from '../services/LocalStor
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
-  const [historialVentas, setHistorialVentas] = useState([]);
+  
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -13,11 +13,7 @@ function Usuarios() {
     setUsuarios(users);
   }, []);
 
-  const obtenerHistorialVentas = (userId) => {
-    const registros = getFromLocalStorage('registro') || [];
-    const historial = registros.filter((registro) => registro === userId);
-    setHistorialVentas(historial);
-  };
+  
 
   const abrirModalEditar = (usuario) => {
     setUsuarioSeleccionado(usuario);
@@ -79,12 +75,7 @@ function Usuarios() {
                 >
                   Eliminar
                 </button>
-                <button
-                  onClick={() => obtenerHistorialVentas(usuario.id)}
-                  className="bg-green-500 text-white px-4 py-1 rounded ml-2"
-                >
-                  Ver Historial
-                </button>
+                
               </td>
             </tr>
           ))}
@@ -119,31 +110,7 @@ function Usuarios() {
       )}
 
       {/* Historial de Ventas */}
-      {historialVentas.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-xl font-bold mb-4">Historial de Ventas</h2>
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th className="py-2">Mesa</th>
-                <th className="py-2">Fecha y Hora</th>
-                <th className="py-2">Productos</th>
-                <th className="py-2">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {historialVentas.map((registro, index) => (
-                <tr key={index} className="hover:bg-gray-100 transition duration-200">
-                  <td className="py-3 px-4 border-b border-gray-200">{registro.mesa}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{registro.fechaHora}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{registro.productos.map(p => `${p.producto} (x${p.cantidad})`).join(', ')}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">${registro.total}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      
     </div>
   );
 }

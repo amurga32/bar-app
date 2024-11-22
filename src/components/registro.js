@@ -64,8 +64,11 @@ function Registro() {
   const imprimirTicketMesa = (registro) => {
     const ticketWindow = window.open('', '_blank');
     ticketWindow.document.write(`
-      <html>
+    <!DOCTYPE html>
+<html lang="es">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Mesa ${registro.mesa}</title>
     <style>
       body {
@@ -73,15 +76,21 @@ function Registro() {
         font-size: 12px;
         margin: 0;
         padding: 10px;
-        width: 200px; /* Ancho típico de una impresora térmica */
+        width: 250px; /* Ancho típico de una impresora térmica */
       }
       h1, h2, p {
         text-align: center;
+        margin: 5px 0;
+        font-size: 15px;
+      }
+      .divider {
+        border-top: 1px dashed #000;
         margin: 5px 0;
       }
       table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 5px;
       }
       th, td {
         text-align: left;
@@ -89,15 +98,22 @@ function Registro() {
       }
       th {
         border-bottom: 1px dashed #000;
-        padding:4px
+        padding: 2px;
       }
       td {
-        
+        font-size: 11px;
+        padding:3px;
+      }
+      .text-right {
+        text-align: right;
       }
       .total {
         font-weight: bold;
         border-top: 1px dashed #000;
         margin-top: 5px;
+        text-align: right;
+        font-size: 14px;
+        width: 250px;
       }
       .footer {
         text-align: center;
@@ -107,41 +123,46 @@ function Registro() {
     </style>
   </head>
   <body>
-    <h1>RESTAURANTE XYZ</h1>
-    <p>Mesa: ${registro.mesa}</p>
+    <h1>IL CAMALEONTE</h1>
+    <p>Mesa: ${registro.mesa || "N/A"}</p>
     <p>Fecha: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</p>
-    <hr />
+    <hr class="divider" />
     <table>
+      <caption>Resumen de Pedido</caption>
       <thead>
         <tr>
           <th>Cant</th>
           <th>Producto</th>
-          <th>Total</th>
+          <th class="text-right">P/1</th>
+          <th class="text-right">Total</th>
         </tr>
       </thead>
       <tbody>
         ${registro.productos
           .map(
             (producto) => `
-              <tr>
-                <td>${producto.cantidad}</td>
-                <td>${producto.producto}</td>
-                <td>$${(producto.cantidad * parseFloat(producto.precio || 0)).toFixed(2)}</td>
-              </tr>
-            `
+            <tr>
+              <td>${producto.cantidad}</td>
+              <td>${producto.producto || "Sin nombre"}</td>
+              <td class="text-right">$${parseFloat(producto.precio || 0).toFixed(2)}</td>
+              <td class="text-right">$${(producto.cantidad * parseFloat(producto.precio || 0)).toFixed(2)}</td>
+            </tr>
+          `
           )
-          .join('')}
+          .join("")}
       </tbody>
     </table>
-    <hr />
-    <h2 class="total">Total: $${registro.productos
-      .reduce((sum, producto) => sum + producto.cantidad * parseFloat(producto.precio || 0), 0)
-      .toFixed(2)}</h2>
+    <hr class="divider" />
+    <h2 class="total">
+      Total: $${registro.productos
+        .reduce((sum, producto) => sum + producto.cantidad * parseFloat(producto.precio || 0), 0)
+        .toFixed(2)}
+    </h2>
     <p class="footer">¡Gracias por su preferencia!</p>
-    <p class="footer"></p>
     <p class="footer">Visítanos pronto</p>
   </body>
 </html>
+
 
 
       
@@ -198,8 +219,8 @@ function Registro() {
         <p className="text-gray-600 text-center">No hay registros aún para el usuario {usuarioActivo.nombre}.</p>
       )}
 
-      <div className="mt-6 text-center">
-        <h2 className="text-xl font-semibold text-green-800">Total del Día: ${totalDia.toFixed(2)}</h2>
+      <div className="mt-4  text-center text-xl font-semibold text-green-800">
+        <strong> Total del Día: ${totalDia.toFixed(2)}</strong>
       </div>
 
       <div className="mt-6 flex justify-center space-x-4">
@@ -212,14 +233,14 @@ function Registro() {
 
         <button
           onClick={imprimirPlanilla}
-          className="bg-red-500 text-white p-2 rounded flex items-center hover:bg-red-900 transition w-32"
+          className="bg-violet-500 text-white p-2 rounded flex items-center hover:bg-violet-200 transition w-32"
         >
           <i className="fas fa-print mr-2"></i> Imprimir Planilla
         </button>
 
         <button
           onClick={cerrarDia}
-          className="bg-red-500 text-white p-2 rounded flex items-center hover:bg-red-900 transition w-32"
+          className="bg-violet-500 text-white p-2 rounded flex items-center hover:bg-violet-200 transition w-32"
         >
           <i className="fas fa-times-circle mr-2"></i> Cerrar Día
         </button>

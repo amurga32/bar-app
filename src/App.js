@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, Router, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, BrowserRouter, useLocation } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Login from './components/login';
 import MainMenu from './components/mainmenu';
@@ -23,10 +23,10 @@ function App() {
   }, []);
 
   return (
-    <Router basename="/bar-app"> {/* Añade el basename aquí */}
-      <div className=''>
+    <BrowserRouter basename="/bar-app"> {/* Cambiar Router a BrowserRouter */}
+      <div className='flex'>
         {location.pathname !== '/' && (
-          <nav className="bg-violet-700 h-full w-64 p-4 top-0 left-0 shadow-lg">
+          <nav className="bg-violet-700 h-full w-64 p-4 shadow-lg">
             <p className='text-white rounded font-semibold'>Usuario: {usuarioActivo}</p>
             <ul>
               <li>
@@ -51,7 +51,7 @@ function App() {
               </li>
               <li>
                 <Link to="/provedores" className="flex items-center text-white p-2 rounded">
-                  <i className="fas fa-truck mr-2"></i> Provedores
+                  <i className="fas fa-truck mr-2"></i> Proveedores
                 </Link>
               </li>
               <li>
@@ -63,17 +63,19 @@ function App() {
           </nav>
         )}
 
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/menu" element={<MainMenu />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/ventas" element={<Ventas />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/provedores" element={<Proveedores />} />
-          <Route path="/usuarios" element={<Usuarios />} />
-        </Routes>
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/menu" element={<MainMenu />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/ventas" element={<Ventas />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/provedores" element={<Proveedores />} />
+            <Route path="/usuarios" element={<Usuarios />} />
+          </Routes>
+        </div>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

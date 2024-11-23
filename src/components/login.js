@@ -65,7 +65,8 @@ function Login() {
   return (
     <div className="flex items-center justify-center h-screen bg-violet-600">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h1 className="text-2xl font-semibold text-center mb-4">Bienvenido</h1>
+        <h1>IL CAMALEONTE</h1>
+        <p className="text-2xl font-semibold text-center mb-4">Bienvenido</p>
 
         <input
           type="text"
@@ -86,14 +87,14 @@ function Login() {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition duration-300 mb-2"
+          className="w-full bg-violet-600 text-white py-2 rounded-lg hover:bg-violet-200 transition duration-300 mb-2"
         >
           Login
         </button>
 
         <button
           onClick={() => setShowModal(true)}
-          className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
+          className="w-full bg-violet-500 text-white py-2 rounded-lg hover:bg-violet-200 transition duration-300"
         >
           Registrarse
         </button>
@@ -156,7 +157,7 @@ function Login() {
 
               <button
                 onClick={handleRegister}
-                className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300 mb-2"
+                className="w-full bg-violet-600 text-white py-2 rounded-lg hover:bg-violet-200 transition duration-300 mb-2"
               >
                 Guardar
               </button>

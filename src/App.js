@@ -25,7 +25,7 @@ function App() {
   return (
     <div className=''>
       {/* Solo mostramos el nav si no estamos en la página de Login */}
-      {location.pathname !== '/' && (
+      {location.pathname !== '/login' && (
         <nav className="bg-violet-700 h-full w-64 p-4 top-0 left-0 shadow-lg">
           <p className='text-white rounded font-semibold'>Usuario: {usuarioActivo}</p>
           <ul>
@@ -64,7 +64,7 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<MainMenu />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/ventas" element={<Ventas />} />

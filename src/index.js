@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';  // Envolvemos aquí
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router basename="/login">
+    <Router>
       <App />
     </Router>
   </React.StrictMode>

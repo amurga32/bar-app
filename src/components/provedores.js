@@ -96,7 +96,48 @@ const Proveedores = () => {
       <h1 className="rounded font-semibold">Gestión de Proveedores</h1>
 
       <form onSubmit={manejarSubmit} className="product-input-section mb-5">
-        {/* Formulario */}
+      <div>
+          <input
+            type="text"
+            placeholder="Nombre del Proveedor"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            className="border border-gray-300 p-2 w-full mb-2"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Contacto"
+            value={contacto}
+            onChange={(e) => setContacto(e.target.value)}
+            className="border border-gray-300 p-2 w-full mb-2"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Producto"
+            value={producto}
+            onChange={(e) => setProducto(e.target.value)}
+            className="border border-gray-300 p-2 w-full mb-2"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Costo"
+            value={costo}
+            onChange={(e) => setCosto(e.target.value)}
+            className="border border-gray-300 p-2 w-full mb-2"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Cantidad"
+            value={cantidad}
+            onChange={(e) => setCantidad(e.target.value)}
+            className="border border-gray-300 p-2 w-full mb-2"
+            required
+          />
+        </div>
         <button type="submit" className="bg-violet-600 text-white p-2 rounded-md shadow transition duration-200">
           {editIndex !== null ? 'Actualizar Proveedor' : 'Agregar Proveedor'}
         </button>
